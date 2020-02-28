@@ -1,0 +1,112 @@
+#include <string>  //Includes the string library
+#include <iostream> // Includes input Output stream
+using namespace std; // allows the use of variablesgetCost
+
+void getItemsAndCost(string[], float[]);
+string getItem(int);
+float getCost(int);
+void bubbleSort(float[], string[], int);
+string findfreeItem(string[]);
+float Total(float[], float);
+void Display(float[], string[], string, float);
+
+int main() {// main body of the program
+	string items[5], freeItem; //declaring variables & array
+	float Cost[5];// declaring array
+	float total;
+	total = 0;
+
+	getItemsAndCost(items, Cost); // calling funtion with parameters
+	bubbleSort(Cost, items, 5);  // calling funtion with parameters
+	freeItem = items[0];    //setting FreeItem variable to the first value within the array
+	Total (Cost, total);
+	Display(Cost, items, freeItem, total);
+
+	return 0;
+}
+
+
+void getItemsAndCost(string items[], float Cost[]) { // begining of getItemsAndCost funtion with 2 parameters
+	for (int i = 0; i < 5; i++) { // Beggining of if selection
+		items[i] = getItem(i);
+		Cost[i] = getCost(i);
+	}
+}// returning no values
+
+// get each item in the array
+string getItem(int i) { // beggining of getItem funtion with 1 parameter
+	string item; // declaring a variable as string
+
+	cout << "What is the name of the item  "; // Displaying a message to the user
+	cin >> item; // the answer the user provides is taken in to the "item" variable
+
+	return item; // returning item to main funtion
+}
+
+bool getValidCost() { // beggining of validation funtion
+	return true; //returning true value
+}
+
+
+float getCost(int i) { // beggining of getCost funtion with one procedure
+	float Cost; //declaring cost as a float value
+
+	cout << "What is the Cost of item?  "; // displaying a message to the user
+	cin >> Cost; // the answer the user provides is put into the cost variable
+
+	return Cost; // returning cost value
+}
+
+void validateCost(int Cost) { // beggining of validate cost function
+	if (Cost < 0) { // beggining of if selection
+		cout << ""; // displaying nothing if cost is less than 0
+	}
+}
+
+
+void bubbleSort(float arr[], string arr2[], int n) { //beggining of the bubblesort function with 3 parameters
+	int i, j; // declaring 2 integer variables
+	bool swapped, swapped2; //declaring 2 boolean variables
+
+	for (i = 0; i < n - 1; i++) { //beggining of bubble sort
+		swapped = false;
+		swapped2 = false;
+
+		for (j = 0; j < n - i - 1; j++) {
+			if (arr[j] > arr[j + 1]) {
+				float temp = arr[j];
+				string temp2 = arr2[j];
+				arr[j] = arr[j + 1];
+				arr2[j] = arr2[j + 1];
+				arr[j + 1] = temp;
+				arr2[j + 1] = temp2;
+				swapped = true;
+				swapped2 = true;
+			}
+		}
+
+		if (swapped == false || swapped2 == false) // if two values are not swapped within the inner loop then break (terminate the loop)
+			break;
+	}
+}
+
+float Total(float Cost[], float total) {
+	//float total;
+	//total = 0;
+	for (int i = 0; i < 5; i++) {
+		total += Cost[i];
+	}
+	total -= Cost[0];
+		return total;
+}
+
+void Display(float Cost[], string items[], string freeItem, float total) { // beggining of Display funtion with  3 procedures
+	for (int i = 0; i < 5; i++) {// opening a loop with conditions that will loop until conditions are met
+		cout << items[i]; // displaying a list of items 
+		cout << Cost[i] << endl;// displaying a list of the cost along side then list of items
+	}
+	// assign value to variable
+	cout << freeItem; // displaying the cheapest item with the price "£0.00"
+	cout << total;
+	 // ending funtion
+}
